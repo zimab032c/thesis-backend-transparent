@@ -61,12 +61,17 @@ async function logConversation(
 
   try {
     const [exists] = await file.exists();
-    if (!exists) {
-      await file.save(logEntry);
-    } else {
-      await file.append(logEntry);
+    let fileContent = "";
+
+    if (exists) {
+      const [content] = await file.download();
+      fileContent = content.toString();
     }
-    console.log("log uploaded to CS");
+
+    fileContent += logEntry;
+
+    await file.save(fileContent);
+    console.log("log update to CS");
   } catch (err) {
     console.error("Failed to log conversation:", err);
   }
