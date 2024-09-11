@@ -419,7 +419,7 @@ app.post("/api/chat", async (req, res) => {
     responseCache[cacheKey] = reply;
 
     const regexA =
-      /(?=.*currently in transit)(?=.*(expected|estimated|should arrive))/i;
+      /(?=.*currently)(?=.*in transit)(?=.*(expected|estimated|should arrive))/i;
     const regexB = /((?=.*updated|modified))(?=.*delivery address)/i;
     // const regexB = /(?=.*updated|modified))(?=.*delivery\s*address)/i;
     const regexC = /(?=.*system error)(?=.*return label)(?=.*generating)/i;
