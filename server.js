@@ -420,8 +420,8 @@ app.post("/api/chat", async (req, res) => {
 
     const regexA =
       /(?=.*in transit|currently in transit)(?=.*(expected|estimated|should arrive))/i;
-    const regexB = /((?=.*updated|modified))(?=.*delivery address)/i;
-    // const regexB = /(?=.*updated|modified))(?=.*delivery\s*address)/i;
+    const regexB = /(?=.*(updated|modified))(?=.*delivery\s*address)/is;
+      // const regexB = /(?=.*updated|modified))(?=.*delivery\s*address)/i;
     const regexC = /(?=.*system error)(?=.*return label)(?=.*generating)/i;
 
     // tracking the 3 tasks the user is supposed to complete
