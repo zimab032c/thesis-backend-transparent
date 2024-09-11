@@ -563,7 +563,7 @@ function checkIfAllTasksCompleted(taskFlags) {
   );
 }
 
-app.post("/api/end-session", (req, res) => {
+app.post("/api/end-session", async (req, res) => {
   const { userId, sessionEnd } = req.body;
 
   if (!userId || sessionEnd !== true) {
@@ -586,7 +586,7 @@ app.post("/api/end-session", (req, res) => {
     const timeMessage = `\n===== SESSION COMPLETED =====\nUser proceeded to the questionnaire.\nTotal time to complete tasks: ${totalMinutes} minutes and ${totalSeconds} seconds\n=============================\n`;
 
     // log completion time
-    logConversation(
+    await logConversation(
       userId,
       "system",
       timeMessage,
