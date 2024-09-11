@@ -261,14 +261,14 @@ app.post("/api/chat", async (req, res) => {
     };
 
     // log initial bot message
-    logConversation(userId, "assistant", introduction, group, true);
+    await logConversation(userId, "assistant", introduction, group, true);
 
     return res.json({ reply: introduction, options: ["Understood"] });
   }
 
   // initial scripted interactions
   const userSession = userSessions[userId];
-  logConversation(userId, "user", userMessage, userSession.group);
+  await logConversation(userId, "user", userMessage, userSession.group);
   userSession.conversationHistory.push({ role: "user", content: userMessage });
 
   if (userSession.waitingForConfirmation) {
@@ -278,7 +278,7 @@ app.post("/api/chat", async (req, res) => {
 
     userSession.lastBotMessage = reply;
 
-    logConversation(userId, "assistant", reply, userSession.group);
+    await logConversation(userId, "assistant", reply, userSession.group);
 
     return res.json({
       reply,
@@ -293,7 +293,7 @@ app.post("/api/chat", async (req, res) => {
       const reply = `Welcome, ${userSession.userName}! I'm ready to assist you with your orders. Which one would you like to manage?`;
 
       // log the bot response
-      logConversation(userId, "assistant", reply, userSession.group);
+      await logConversation(userId, "assistant", reply, userSession.group);
 
       return res.json({
         reply,
@@ -304,7 +304,7 @@ app.post("/api/chat", async (req, res) => {
       const reply = `It seems like the customer number you entered is incorrect. You can find your customer number in the confirmation E-Mail from your last purchase with us (Button with ? icon).`;
 
       // log the bot response
-      logConversation(userId, "assistant", reply, userSession.group);
+      await logConversation(userId, "assistant", reply, userSession.group);
 
       return res.json({
         reply,
@@ -339,7 +339,7 @@ app.post("/api/chat", async (req, res) => {
       const reply = `Got it! You've selected Order ${selectedOrder.id}. How can I assist you with this order?`;
 
       // log the bot response
-      logConversation(userId, "assistant", reply, userSession.group);
+      await logConversation(userId, "assistant", reply, userSession.group);
 
       return res.json({
         reply,
@@ -356,7 +356,7 @@ app.post("/api/chat", async (req, res) => {
       const reply = "Please select an order to manage.";
 
       // log the bot response
-      logConversation(userId, "assistant", reply, userSession.group);
+      await logConversation(userId, "assistant", reply, userSession.group);
 
       return res.json({
         reply,
@@ -369,7 +369,7 @@ app.post("/api/chat", async (req, res) => {
     const reply = "Sure! Which order can I help you with?";
 
     // log the bot response
-    logConversation(userId, "assistant", reply, userSession.group);
+    await logConversation(userId, "assistant", reply, userSession.group);
 
     return res.json({
       reply,
@@ -413,7 +413,7 @@ app.post("/api/chat", async (req, res) => {
     userSession.conversationHistory.push({ role: "assistant", content: reply });
 
     // log bot response
-    logConversation(userId, "assistant", reply, userSession.group);
+    await logConversation(userId, "assistant", reply, userSession.group);
 
     // cache the response
     responseCache[cacheKey] = reply;
@@ -446,7 +446,7 @@ app.post("/api/chat", async (req, res) => {
     const task = taskCompletion[currentOrderId];
     if (task && task.regex.test(reply)) {
       userSession.taskFlags[task.flag] = true;
-      logConversation(userId, "system", task.message, userSession.group);
+      await logConversation(userId, "system", task.message, userSession.group);
     }
 
     // if (regexA.test(reply) && currentOrderId === "A") {
@@ -476,7 +476,7 @@ app.post("/api/chat", async (req, res) => {
     // }
 
     // log task flag status every time a response is sent
-    logConversation(
+    await logConversation(
       userId,
       "system",
       `Task Flags: ${JSON.stringify(userSession.taskFlags)}`,
@@ -488,7 +488,7 @@ app.post("/api/chat", async (req, res) => {
 
     // if all tasks are completed, log it
     if (allTasksCompleted) {
-      logConversation(
+      await logConversation(
         userId,
         "system",
         "All tasks completed, prompt for questionnaire",
