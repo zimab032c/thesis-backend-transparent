@@ -250,7 +250,7 @@ app.post("/api/chat", async (req, res) => {
       waitingForConfirmation: true,
       customerNumber: null,
       //IMPORTANT, change later!!
-      userName: "Ilia",
+      userName: "Ana",
       group: group,
       taskFlags: {
         trackOrderACompleted: false,
@@ -290,7 +290,7 @@ app.post("/api/chat", async (req, res) => {
   if (!userSession.customerNumber) {
     if (/123-456/.test(userMessage)) {
       userSession.customerNumber = userMessage;
-      const reply = `Welcome, ${userSession.userName}! I'm ready to assist you with your orders. Which one would you like to manage?`;
+      const reply = `Welcome back ${userSession.userName}! I'm ready to assist you with your orders. Which one would you like to manage?`;
 
       // log the bot response
       await logConversation(userId, "assistant", reply, userSession.group);
