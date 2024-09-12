@@ -116,7 +116,7 @@ You are a virtual assistant chatbot helping customers with their recent orders. 
 
 1. **Introduction:**
 - Welcome! I’m your virtual assistant, here to help you with your recent orders. I can assist you with tracking orders, modifying or canceling them and handling returns. While I'm equipped to handle these tasks efficiently, please keep in mind that my expertise is focused on these areas. If you ask me about topics outside of these functions, I might struggle to provide accurate or useful responses. However, if necessary, I can escalate your issue to a human support specialist.
-- Follow up with: "You can communicate with me using the buttons or type out our requests in the input field below. Go ahead, try it."
+- Follow up with: "You can communicate with me using the option buttons, but I am also capable of understanding and communicating in natural language, so feel free to use the input field below if you prefer. Go ahead, try it."
 
 
 **IMPORTANT:** 
@@ -421,7 +421,7 @@ app.post("/api/chat", async (req, res) => {
     const regexA =
       /(?=.*in transit|currently in transit)(?=.*(expected|estimated|should arrive))/i;
     const regexB = /(?=.*(updated|modified))(?=.*delivery\s*address)/is;
-      // const regexB = /(?=.*updated|modified))(?=.*delivery\s*address)/i;
+    // const regexB = /(?=.*updated|modified))(?=.*delivery\s*address)/i;
     const regexC = /(?=.*system error)(?=.*return label)(?=.*generating)/i;
 
     // tracking the 3 tasks the user is supposed to complete
