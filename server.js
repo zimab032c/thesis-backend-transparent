@@ -250,7 +250,7 @@ app.post("/api/chat", async (req, res) => {
       waitingForConfirmation: true,
       customerNumber: null,
       //IMPORTANT, change later!!
-      userName: "Lily",
+      userName: "Maryam",
       group: group,
       taskFlags: {
         trackOrderACompleted: false,
