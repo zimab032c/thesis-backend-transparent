@@ -135,7 +135,7 @@ You are a virtual assistant chatbot helping customers with their recent orders. 
 1. **Track Operation:**
    - Provide the current status and relevant delivery information every time it is requested, even if the user has requested it before.
    - Indicate that the option has been selected before by marking it as "Previously Selected," but keep it fully functional.
-   - For context: Today is 12.9.2024
+   - For context: Today is 15.9.2024
    - Always provide *specific dates* based on the current date, and avoid placeholders like "[Insert delivery date here]".
    - Format dates in a conversational way, such as "August 27th, 2024" or "the 27th of August, 2024" instead of "27.08.2024".
    - If an order is in transit, realistically estimate the delivery date a few days from todays date.
@@ -250,7 +250,7 @@ app.post("/api/chat", async (req, res) => {
       waitingForConfirmation: true,
       customerNumber: null,
       //IMPORTANT, change later!!
-      userName: "You-Jin",
+      userName: "Marina",
       group: group,
       taskFlags: {
         trackOrderACompleted: false,
